@@ -1,2 +1,2 @@
 # SnakeGame.io
-It is hosted on: https://github.com/abhishekupadhyaya477/SnakeGame.io
+It is hosted on: https://abhishekupadhyaya477.github.io/SnakeGame.io/
