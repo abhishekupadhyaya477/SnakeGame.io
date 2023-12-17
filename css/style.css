@@ -1,64 +1,251 @@
-*{
-    padding: 0px;
-    margin: 0px;
+/* Reset some default styles */
+body, html {
+    margin: 0;
+    padding: 0;
 }
-.gameContainer{
-    background: url(../bg.jpg) no-repeat ;
-    background-size: 100vw 100vh;
+
+/* Set a background color for the body */
+body {
+    background-color: #f5f5f5; /* Light gray background */
+}
+
+/* Style for the game container */
+.gameContainer {
+    background: url(../bg.jpg) no-repeat center center fixed;
+    background-size: cover;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-#board{
-    height: 92vmin;
-    width: 90vmin;
-    background: linear-gradient(rgb(145, 234, 116),rgb(237, 250, 99));
-    border: none;
-    box-shadow:-8px -8px 15px rgb(255 255 255 / 50%),
-    10px 10px 10px rgb(0 0 0 / 30%),
-     inset -8px -8px 15px rgb(255 255 255 / 50%),
-    inset 10px 10px 10px rgb(0 0 0 / 30%);
+.navigation-controls {
+    display: none;
+}
+
+/* Style for the game board */
+#board {
+    height: 80vmin;
+    width: 80vmin;
+    background: linear-gradient(rgb(145, 234, 116), rgb(237, 250, 99));
+    box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.5),
+                10px 10px 10px rgba(0, 0, 0, 0.3),
+                inset -8px -8px 15px rgba(255, 255, 255, 0.5),
+                inset 10px 10px 10px rgba(0, 0, 0, 0.3);
     display: grid;
-    grid-template-columns: repeat(18,1fr);
-    grid-template-rows: repeat(18,1fr);
+    grid-template-columns: repeat(18, 1fr);
+    grid-template-rows: repeat(18, 1fr);
+    border-radius: 15px;
+    margin-bottom: 20px;
 }
-#scoreBox{
-    position: absolute;
-    top: 9px;
-    right: 163px;
-    font-size: 30px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+/* Style for score and high score boxes */
+#scoreBox,
+#HighScoreBox {
+    font-size: 20px;
+    font-family: 'Verdana', Geneva, Tahoma, sans-serif;
     color: blanchedalmond;
+    text-align: right;
+    margin-bottom: 10px;
 }
-#HighScoreBox{
-    position: absolute;
-    top: 59px;
-    right: 90px;
-    font-size: 30px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: blanchedalmond;
-}
-/* .span{
-    position: absolute;
-    top: 30px;
-    font-size: 100px;
-    color: rgb(151, 113, 113);
-} */
-.food{
-    background:linear-gradient(white,red);
-    border-radius: 100% 50% 100% 1%;
-}
-.food1{
+
+/* Styling for food elements */
+.food,
+.food1 {
     border-radius: 50%;
-    border: goldenrod 5px solid;
-    background:linear-gradient(rgb(244, 236, 0),rgb(255, 217, 0));
+    animation: foodAnimation .4s infinite; /* Add animation */
 }
-.snake{
-    background:linear-gradient(green,yellow);
+
+@keyframes foodAnimation {
+    from {
+        transform: scale(1); /* Initial scale */
+    }
+    to {
+        transform: scale(1.4); /* Scale when animated */
+    }
+}
+
+.food {
+    background: linear-gradient(white, red);
+}
+
+.food1 {
+    border: 5px solid goldenrod;
+    background: linear-gradient(rgb(244, 236, 0), rgb(255, 217, 0));
+}
+
+
+/* Styling for snake elements */
+.snake {
+    background: linear-gradient(green, yellow);
     border-radius: 40%;
+    border: 2px solid darkgreen; /* Add a border for a segmented look */
 }
-.head{
-    background:linear-gradient(rgb(17, 230, 17),rgba(19, 21, 19, 0.89));
-    border-radius: 40% 40% 20% 20%  ; 
+
+.head {
+    background: linear-gradient(rgb(17, 230, 17), rgba(19, 21, 19, 0.89));
+    border-radius: 40% 40% 25% 25%;
+    border: 2px solid darkgreen; /* Add a border for a segmented look */
+    position: relative; /* Position relative for eyes */
+}
+
+.head::before,
+.head::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(101, 1, 1, 0.658);
+    border-radius: 50%;
+    top: 30%; /* Adjust the eye position */
+}
+
+.head::before {
+    left: 15%; /* Adjust the left eye position */
+}
+
+.head::after {
+    right: 15%; /* Adjust the right eye position */
+}
+
+
+/* Stylish and responsive mobile controls */
+.mobile-controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.mobile-controls button {
+    font-size: 18px;
+    padding: 12px 18px;
+    background-color: #4CAF50; /* Green background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.mobile-controls button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Stylish and responsive speed adjuster */
+.speed-adjuster {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.speed-adjuster label {
+    font-size: 16px;
+    margin-right: 10px;
+
+}
+
+.speed-adjuster input {
+    width: 150px;
+    margin-right: 10px;
+}
+
+/* Stylish and responsive container for controls */
+.container-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px; /* Adjust max-width as needed */
+}
+.speed-adjuster {
+    margin: 20px 0;
+    text-align: center;
+
+}
+
+
+
+.speed-adjuster .speed-text {
+    margin-top: 8px;
+     font-size: 20px;
+    font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+    color: blanchedalmond;
+}
+
+.speed-adjuster input {
+    width: 150px;
+    margin-top: 8px;
+    appearance: none; /* Remove default styles */
+    background: linear-gradient(to right, #4CAF50, #FFC107); /* Gradient background */
+    height: 10px;
+    border-radius: 5px;
+    outline: none; /* Remove focus outline */
+    transition: background 0.3s ease; /* Smooth transition */
+}
+
+.speed-adjuster input::-webkit-slider-thumb {
+    appearance: none; /* Remove default styles */
+    width: 20px;
+    height: 20px;
+    background: #4CAF50; /* Green color for thumb */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease; /* Smooth transition */
+}
+
+.speed-adjuster input::-moz-range-thumb {
+    appearance: none; /* Remove default styles */
+    width: 20px;
+    height: 20px;
+    background: #4CAF50; /* Green color for thumb */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease; /* Smooth transition */
+}
+
+.speed-adjuster input:hover::-webkit-slider-thumb,
+.speed-adjuster input:hover::-moz-range-thumb {
+    background: #45a049; /* Darker green color on hover */
+}
+
+
+/* Responsive layout for larger screens */
+@media only screen and (min-width: 768px) {
+    .gameContainer {
+        flex-direction: column;
+    }
+
+    #board {
+        margin-right: 20px;
+    }
+}
+@media (max-width: 768px) {
+    .navigation-controls {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    .mobile-controls {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+
+    .mobile-controls button {
+        font-size: 18px;
+        padding: 10px 15px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .mobile-controls div {
+        flex: 1; /* Distribute the empty divs evenly */
+    }
 }

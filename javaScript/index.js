@@ -176,7 +176,7 @@ window.addEventListener("keydown", (e) => {
       prevKey = "ArrowRight";
       break;
     //   Adding this for speeding up
-    case e.key == "Shift1":
+    case e.key == "Shift":
       speed++;
       break;
 
@@ -186,3 +186,35 @@ window.addEventListener("keydown", (e) => {
       break;
   }
 });
+// Add event listeners for mobile controls
+document.getElementById('upBtn').addEventListener('click', () => {
+  inputDir = { x: 0, y: -1 };
+  moveSound.play();
+});
+
+document.getElementById('leftBtn').addEventListener('click', () => {
+  inputDir = { x: -1, y: 0 };
+  moveSound.play();
+});
+
+document.getElementById('downBtn').addEventListener('click', () => {
+  inputDir = { x: 0, y: 1 };
+  moveSound.play();
+});
+
+document.getElementById('rightBtn').addEventListener('click', () => {
+  inputDir = { x: 1, y: 0 };
+  moveSound.play();
+});
+
+const speedSlider = document.getElementById('speedSlider');
+const speedLabel = document.getElementById('speedLabel'); 
+
+// Add event listener for speed adjuster
+speedSlider.addEventListener('input', () => {
+    speedGot = parseInt(speedSlider.value);
+    speed=speedGot
+    console.log(speed);
+    // speedLabel.innerHTML = `Speed: ${speed}`; 
+});
+
