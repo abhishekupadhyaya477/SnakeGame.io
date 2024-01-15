@@ -186,6 +186,25 @@ window.addEventListener("keydown", (e) => {
       break;
   }
 });
+document.addEventListener('swiped-up', function(e) {
+  inputDir = { x: 0, y: -1 };
+  moveSound.play();
+});
+
+document.addEventListener('swiped-left', function(e) {
+  inputDir = { x: -1, y: 0 };
+  moveSound.play();
+});
+
+document.addEventListener('swiped-down', function(e) {
+  inputDir = { x: 0, y: 1 };
+  moveSound.play();
+});
+
+document.addEventListener('swiped-right', function(e) {
+  inputDir = { x: 1, y: 0 };
+  moveSound.play();
+});
 // Add event listeners for mobile controls
 document.getElementById('upBtn').addEventListener('click', () => {
   inputDir = { x: 0, y: -1 };
